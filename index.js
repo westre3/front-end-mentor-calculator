@@ -62,18 +62,91 @@ document.querySelector('.button-reset').addEventListener('click', () => {
 });
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    updateStateMachine('=');
-  } else if (e.key === 'Backspace' || e.key == 'Delete') {
-    updateStateMachine('del');
-  } else if (e.key === 'Escape') {
-    resetStateMachine();
-  } else {
-    updateStateMachine(e.key);
+  switch (e.key) {
+    case '0':
+      updateStateMachine('0');
+      animateKey('.button-0');
+      break;
+    case '1':
+      updateStateMachine('1');
+      animateKey('.button-1');
+      break;
+    case '2':
+      updateStateMachine('2');
+      animateKey('.button-2');
+      break;
+    case '3':
+      updateStateMachine('3');
+      animateKey('.button-3');
+      break;
+    case '4':
+      updateStateMachine('4');
+      animateKey('.button-4');
+      break;
+    case '5':
+      updateStateMachine('5');
+      animateKey('.button-5');
+      break;
+    case '6':
+      updateStateMachine('6');
+      animateKey('.button-6');
+      break;
+    case '7':
+      updateStateMachine('7');
+      animateKey('.button-7');
+      break;
+    case '8':
+      updateStateMachine('8');
+      animateKey('.button-8');
+      break;
+    case '9':
+      updateStateMachine('9');
+      animateKey('.button-9');
+      break;
+    case '.':
+      updateStateMachine('.');
+      animateKey('.button-decimal');
+      break;
+    case '+':
+      updateStateMachine('+');
+      animateKey('.button-add');
+      break;
+    case '-':
+      updateStateMachine('-');
+      animateKey('.button-subtract');
+      break;
+    case '*':
+      updateStateMachine('*');
+      animateKey('.button-multiply');
+      break;
+    case '/':
+      updateStateMachine('/');
+      animateKey('.button-divide');
+      break;
+    case '=':
+    case 'Enter':
+      updateStateMachine('=');
+      animateKey('.button-equals');
+      break;
+    case 'Backspace':
+    case 'Delete':
+      updateStateMachine('del');
+      animateKey('.button-del');
+      break;
+    case 'Escape':
+      resetStateMachine();
+      animateKey('.button-reset');
+      break;
   }
 
   e.preventDefault();
 });
+
+const animateKey = (keyClassString) => {
+  const keyClass = document.querySelector(keyClassString);
+  keyClass.classList.add('active');
+  setTimeout(() => keyClass.classList.remove('active'), 100);
+};
 
 const updateStateMachine = (input) => {
   if (state === 'firstNumber') {
@@ -317,5 +390,3 @@ const updateDisplay = (value) => {
 const insert = (index, strToInsert, baseStr) => {
   return baseStr.slice(0, index) + strToInsert + baseStr.slice(index);
 };
-
-// TODO: Make everything keyboard accessible with tabs

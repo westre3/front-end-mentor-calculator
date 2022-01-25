@@ -310,7 +310,8 @@ button {
   box-shadow: 0 0.25rem var(--clr-key-shadow-main);
 }
 
-button:active {
+button:active,
+button.active {
   box-shadow: none;
   transform: translateY(0.25rem);
 }
