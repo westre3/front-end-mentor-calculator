@@ -27,6 +27,10 @@ for (let i = 0; i <= 9; i++) {
   });
 }
 
+document.querySelector('.button-decimal').addEventListener('click', () => {
+  updateStateMachine('.');
+});
+
 document.querySelector('.button-add').addEventListener('click', () => {
   updateStateMachine('+');
 });
@@ -71,6 +75,10 @@ const updateStateMachine = (input) => {
         firstOperand += input;
         updateDisplay(firstOperand);
         break;
+      case '.':
+        firstOperand = appendDecimal(firstOperand);
+        updateDisplay(firstOperand);
+        break;
       case '+':
       case '-':
       case '*':
@@ -90,6 +98,9 @@ const updateStateMachine = (input) => {
       case 'reset':
         resetStateMachine();
         break;
+      default:
+        resetStateMachine();
+        break;
     }
   } else if (state === 'secondNumber') {
     switch (input) {
@@ -104,6 +115,10 @@ const updateStateMachine = (input) => {
       case '8':
       case '9':
         secondOperand += input;
+        updateDisplay(secondOperand);
+        break;
+      case '.':
+        secondOperand = appendDecimal(secondOperand);
         updateDisplay(secondOperand);
         break;
       case '+':
@@ -127,6 +142,9 @@ const updateStateMachine = (input) => {
       case 'reset':
         resetStateMachine();
         break;
+      default:
+        resetStateMachine();
+        break;
     }
   } else if (state === 'evaluate') {
     switch (input) {
@@ -143,6 +161,10 @@ const updateStateMachine = (input) => {
         firstOperand = input;
         updateDisplay(firstOperand);
         state = 'firstNumber';
+        break;
+      case '.':
+        firstOperand = appendDecimal(firstOperand);
+        updateDisplay(firstOperand);
         break;
       case '+':
       case '-':
@@ -163,9 +185,22 @@ const updateStateMachine = (input) => {
       case 'reset':
         resetStateMachine();
         break;
+      default:
+        resetStateMachine();
+        break;
     }
   } else {
     resetStateMachine();
+  }
+};
+
+const appendDecimal = (value) => {
+  if (value === '') {
+    return '0.';
+  } else if (value.indexOf('.') === -1) {
+    return value + '.';
+  } else {
+    return value;
   }
 };
 
@@ -260,7 +295,6 @@ const insert = (index, strToInsert, baseStr) => {
   return baseStr.slice(0, index) + strToInsert + baseStr.slice(index);
 };
 
-// TODO: Make it illegal to insert more than one decimal point
 // TODO: Either limit display number of characters or decrease display font size if number gets too big
 // TODO: Allow pressing keys to active the appropriate calculator keys
 // TODO: Make everything keyboard accessible with tabs
