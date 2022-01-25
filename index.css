@@ -195,10 +195,6 @@ input[type='range']::-webkit-slider-thumb {
   --clr-text-display: var(--clr-theme-3-text-light);
 }
 
-/* .theme-3 {
-
-} */
-
 body {
   background-color: var(--clr-bg-main);
   font-family: var(--ff-number);
@@ -311,6 +307,11 @@ button {
   padding: 0.5rem 1rem;
   cursor: pointer;
   box-shadow: 0 0.25rem var(--clr-key-shadow-main);
+}
+
+button:active {
+  box-shadow: none;
+  transform: translateY(0.25rem);
 }
 
 .button-reset,
