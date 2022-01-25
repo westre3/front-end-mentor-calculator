@@ -208,6 +208,7 @@ body * {
 .container {
   max-width: 30rem;
   margin: 2rem auto;
+  padding-inline: 2rem;
 }
 
 .container > *:not(:last-child) {
