@@ -14,6 +14,8 @@ const setTheme = (themeNumber) => {
 
 // Calculator Functionality
 
+const defaultDisplayFontSize = getComputedStyle(document.querySelector('.display')).getPropertyValue('font-size');
+
 let firstOperand = '';
 let operation = '';
 let secondOperand = '';
@@ -57,6 +59,20 @@ document.querySelector('.button-del').addEventListener('click', () => {
 
 document.querySelector('.button-reset').addEventListener('click', () => {
   resetStateMachine();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    updateStateMachine('=');
+  } else if (e.key === 'Backspace' || e.key == 'Delete') {
+    updateStateMachine('del');
+  } else if (e.key === 'Escape') {
+    resetStateMachine();
+  } else {
+    updateStateMachine(e.key);
+  }
+
+  e.preventDefault();
 });
 
 const updateStateMachine = (input) => {
@@ -163,8 +179,9 @@ const updateStateMachine = (input) => {
         state = 'firstNumber';
         break;
       case '.':
-        firstOperand = appendDecimal(firstOperand);
+        firstOperand = appendDecimal('');
         updateDisplay(firstOperand);
+        state = 'firstNumber';
         break;
       case '+':
       case '-':
@@ -264,6 +281,7 @@ const resetStateMachine = () => {
   operation = '';
   secondOperand = '';
   updateDisplay('');
+  document.querySelector('.display').style.fontSize = defaultDisplayFontSize;
   state = 'firstNumber';
 };
 
@@ -289,12 +307,15 @@ const updateDisplay = (value) => {
   }
 
   display.innerHTML = displayedValue;
+
+  if (display.scrollWidth > display.clientWidth) {
+    const fontSize = getComputedStyle(display).getPropertyValue('font-size');
+    display.style.fontSize = String(Number(fontSize.slice(0, -2)) / 2) + 'px';
+  }
 };
 
 const insert = (index, strToInsert, baseStr) => {
   return baseStr.slice(0, index) + strToInsert + baseStr.slice(index);
 };
 
-// TODO: Either limit display number of characters or decrease display font size if number gets too big
-// TODO: Allow pressing keys to active the appropriate calculator keys
 // TODO: Make everything keyboard accessible with tabs
