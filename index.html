@@ -9,23 +9,50 @@
 
     <title>Frontend Mentor | Calculator app</title>
 
-    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-    <style>
-      .attribution {
-        font-size: 11px;
-        text-align: center;
-      }
-      .attribution a {
-        color: hsl(228, 45%, 44%);
-      }
-    </style>
-
     <link rel="stylesheet" href="index.css" />
   </head>
-  <body>
+  <body class="theme-2">
+    <div class="container">
+      <div class="header">
+        <h1>calc</h1>
+        <div class="theme-selector">
+          <label for="theme-range">theme</label>
+          <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+          </ul>
+          <input type="range" class="theme-slider" id="theme-range" min="1" max="3" step="1" />
+        </div>
+      </div>
+      <div class="display">0</div>
+      <div class="keypad">
+        <button class="button-7">7</button>
+        <button class="button-8">8</button>
+        <button class="button-9">9</button>
+        <button class="button-del">DEL</button>
+        <button class="button-4">4</button>
+        <button class="button-5">5</button>
+        <button class="button-6">6</button>
+        <button class="button-add">+</button>
+        <button class="button-1">1</button>
+        <button class="button-2">2</button>
+        <button class="button-3">3</button>
+        <button class="button-subtract">-</button>
+        <button class="button-decimal">.</button>
+        <button class="button-0">0</button>
+        <button class="button-divide">/</button>
+        <button class="button-multiply">x</button>
+        <button class="button-reset">RESET</button>
+        <button class="button-equals">=</button>
+      </div>
+    </div>
+
     <div class="attribution">
       Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. Coded by
-      <a href="#">Your Name Here</a>.
+      <a href="#">Trey West</a>.
     </div>
+
+    <script src="index.js"></script>
   </body>
 </html>
