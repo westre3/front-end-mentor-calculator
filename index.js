@@ -4,6 +4,7 @@ const themes = ['theme-1', 'theme-2', 'theme-3'];
 // Control Theme Slider
 themeSlider.addEventListener('input', () => {
   setTheme(themeSlider.value);
+  localStorage.setItem('theme-preference', `theme-${themeSlider.value}`);
 });
 
 const setTheme = (themeNumber) => {
@@ -12,6 +13,25 @@ const setTheme = (themeNumber) => {
   body.classList.add(themes[themeNumber - 1]);
 };
 
+if (localStorage.getItem('theme-preference') == 'theme-1') {
+  themeSlider.value = 1;
+  setTheme(1);
+} else if (localStorage.getItem('theme-preference') == 'theme-2') {
+  themeSlider.value = 2;
+  setTheme(2);
+} else if (localStorage.getItem('theme-preference') == 'theme-3') {
+  themeSlider.value = 3;
+  setTheme(3);
+} else if (matchMedia && matchMedia('(prefers-color-scheme: light)').matches) {
+  themeSlider.value = 2;
+  setTheme(2);
+} else if (matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) {
+  themeSlider.value = 3;
+  setTheme(3);
+} else {
+  themeSlider.value = 1;
+  setTheme(1);
+}
 // Calculator Functionality
 
 const defaultDisplayFontSize = getComputedStyle(document.querySelector('.display')).getPropertyValue('font-size');
